@@ -2,6 +2,6 @@
 
 websocket service
 
-## Licença de uso
+## Lisence
 
 [MIT](https://choosealicense.com/licenses/mit/)
