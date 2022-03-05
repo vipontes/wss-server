@@ -65,7 +65,8 @@ module.exports = (app, db) => {
   //? getMessagesByUser
   //! **************************************************************
   controller.getMessagesByUser = (req, res) => {
-    let userId = req.params.usuario_id;
+    let fromUser = req.params.usuario_emissor_id;
+    let toUser = req.params.usuario_receptor_id;
 
     sql = `SELECT 
         mensagem_id,
@@ -74,8 +75,8 @@ module.exports = (app, db) => {
         mensagem_conteudo,
         mensagem_data
         FROM mensagem
-        WHERE usuario_emissor_id = ${userId} 
-        OR usuario_receptor_id = ${userId}
+        WHERE (usuario_emissor_id = ${fromUser} AND usuario_receptor_id = ${toUser})
+        OR (usuario_emissor_id = ${toUser} AND usuario_receptor_id = ${fromUser})
         ORDER BY mensagem_data ASC`;
 
     db.query(sql, (err, result) => {
